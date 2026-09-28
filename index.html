@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CommonBlock</title>
+<meta name="description" content="CommonBlock: neighborhood funds that share real estate appreciation with residents, on rails that keep the value circulating locally. Pilot: South Shore, Chicago.">
+<meta property="og:title" content="CommonBlock">
+<meta property="og:description" content="Real buildings appreciate. Residents get a share they can spend on the block.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://commonblock.co/">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: a single reading column (68ch) with full-width interactive panels; forest/gold from the deck. */
+:root{
+  --bg:#FBFBF8; --surface:#EEF3EF; --surface2:#E2EAE4; --fg:#1D2521; --muted:#5B6760; --line:#C9D6CE;
+  --green:#1F4A36; --green2:#2F6F52; --gold:#C98C12; --goldSoft:#F6E9C9; --onGreen:#FFFFFF; --onGreenMuted:#D7E4DB;
+  --display:"Fraunces",Georgia,"Times New Roman",serif; --body:"Source Sans 3","Segoe UI",Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#111816; --surface:#182420; --surface2:#213129; --fg:#EAF0EC; --muted:#A8B7AE; --line:#324740; --green:#173A2A; --green2:#3E8A67; --gold:#E0A83A; --goldSoft:#3A2E12; --onGreen:#F4F8F5; --onGreenMuted:#B9CCC0; color-scheme:dark } }
+:root[data-theme="dark"]{ --bg:#111816; --surface:#182420; --surface2:#213129; --fg:#EAF0EC; --muted:#A8B7AE; --line:#324740; --green:#173A2A; --green2:#3E8A67; --gold:#E0A83A; --goldSoft:#3A2E12; --onGreen:#F4F8F5; --onGreenMuted:#B9CCC0; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.55;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding-block:0 64px;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);color:var(--green);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,6vw,54px);font-weight:600}
+h2{font-size:clamp(26px,3.6vw,34px);font-weight:600;margin-top:64px}
+h3{font-size:20px;font-weight:600}
+p{max-width:68ch;margin:12px 0}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.lede{font-size:20px;color:var(--muted);max-width:60ch}
+.muted{color:var(--muted)}
+.hero{padding-block:56px 24px}
+.hero .line{font-family:var(--display);font-size:clamp(20px,2.6vw,26px);color:var(--fg);max-width:34ch;margin-top:20px;font-weight:500}
+nav{display:flex;gap:6px 18px;flex-wrap:wrap;margin-top:22px;font-size:14px}
+nav a{color:var(--green2);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px}
+nav a:hover,nav a:focus-visible{border-color:var(--gold)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
+@media (max-width:760px){.grid3,.grid2{grid-template-columns:1fr}}
+.card{background:var(--surface);border-radius:12px;padding:22px;min-width:0}
+.card.dark{background:var(--green);color:var(--onGreen)}
+.card.dark h3,.card.dark .big{color:var(--onGreen)}
+.card.dark .eyebrow{color:var(--gold)}
+.card.dark .muted{color:var(--onGreenMuted)}
+.card p{font-size:15.5px;margin:10px 0 0}
+a.doc{display:block;color:inherit;text-decoration:none;border:1px solid transparent}
+a.doc:hover,a.doc:focus-visible{border-color:var(--gold)}
+a.doc h3{margin-top:6px}
+.big{font-family:var(--display);font-size:38px;font-weight:600;color:var(--green);line-height:1;margin-top:14px;font-variant-numeric:tabular-nums}
+.big.gold{color:var(--gold)}
+.small{font-size:13px;color:var(--muted);margin-top:4px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
+@media (max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stat{background:var(--surface);border-radius:10px;padding:16px;min-width:0}
+.stat .v{font-family:var(--display);font-size:30px;font-weight:600;color:var(--green);line-height:1.05;font-variant-numeric:tabular-nums}
+.stat .l{font-size:13px;color:var(--muted);margin-top:6px}
+.panel{background:var(--surface);border-radius:14px;padding:24px;margin-top:22px}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px 28px;margin-top:6px}
+.ctl label{display:flex;justify-content:space-between;font-size:14px;font-weight:600;color:var(--fg)}
+.ctl label output{font-variant-numeric:tabular-nums;color:var(--green2)}
+.ctl input[type=range]{width:100%;accent-color:var(--green2);margin-top:6px}
+.ctl .hint{font-size:12.5px;color:var(--muted);margin-top:2px}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px}
+.res{background:var(--bg);border-radius:10px;padding:12px 14px;min-width:0}
+.res .v{font-family:var(--display);font-size:26px;font-weight:600;color:var(--green);line-height:1.05;font-variant-numeric:tabular-nums}
+.res .v.gold{color:var(--gold)}
+.res .l{font-size:12.5px;color:var(--muted);margin-top:4px}
+.chart{margin-top:18px;background:var(--bg);border-radius:10px;padding:12px}
+.chart svg{width:100%;height:auto;display:block}
+.chart .cap{font-size:12.5px;color:var(--muted);margin-top:6px}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:20px}
+@media (max-width:860px){.flow{grid-template-columns:1fr}}
+.step{background:var(--surface);border-radius:10px;padding:14px;min-width:0;position:relative}
+.step:first-child{background:var(--green);color:var(--onGreen)}
+.step:first-child h3{color:var(--onGreen)}
+.step h3{font-size:16px}
+.step p{font-size:14px;margin-top:6px}
+.step:first-child p{color:var(--onGreenMuted)}
+.num{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--green2);color:#fff;font-size:13px;font-weight:700;align-items:center;justify-content:center;margin-bottom:8px}
+.step:first-child .num{background:var(--gold)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin-top:18px}
+.tbl{overflow-x:auto}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--green);color:var(--onGreen);font-weight:600;font-size:13px;letter-spacing:.02em}
+tr:nth-child(even) td{background:var(--surface)}
+td:first-child{font-weight:600;white-space:nowrap}
+.note{font-size:14px;color:var(--muted);border-left:3px solid var(--gold);padding-left:12px;margin-top:18px;max-width:72ch}
+.ask{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+@media (max-width:760px){.ask{grid-template-columns:1fr}}
+.contact{background:var(--green);color:var(--onGreen);border-radius:14px;padding:28px;margin-top:56px}
+.contact h2{color:var(--onGreen);margin-top:0}
+.contact p{color:var(--onGreenMuted)}
+.contact .em{font-family:var(--display);font-size:22px;color:var(--gold);user-select:all}
+footer{font-size:12.5px;color:var(--muted);margin-top:36px;max-width:80ch}
+a:focus-visible,input:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){.res .v{transition:color .2s}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">CommonBlock · South Shore, Chicago · September 2026 working draft</div>
+  <h1>Real buildings appreciate. Residents get a share they can spend on the block.</h1>
+  <p class="line">A neighborhood fund buys and improves buildings, tokenizes 35% of the gain for the people who live there, and puts it in a wallet that works at the corner store.</p>
+  <nav aria-label="Sections">
+    <a href="#problem">Problem</a><a href="#solution">Solution</a><a href="#fund">Fund model</a><a href="#stake">A resident's stake</a><a href="#loop">Local economy</a><a href="#protection">Protection</a><a href="#who">Who gets what</a><a href="#company">The company</a><a href="#ask">What we're looking for</a><a href="#documents">Documents</a>
+  </nav>
+</header>
+
+<section id="problem">
+  <h2>Revitalization usually displaces the people who made it home</h2>
+  <p class="lede">Disinvested neighborhoods are priced as if nothing will change. When investment finally arrives, the gain goes to outside buyers and long-time residents get priced out.</p>
+  <div class="stats">
+    <div class="stat"><div class="v">13 yrs</div><div class="l">South Shore led Chicago in multifamily building sales, through 2023</div></div>
+    <div class="stat"><div class="v">&lt;$60K → ~$73K</div><div class="l">Inflation-adjusted price per unit, 2019 to 2024, after the Obama Center was announced</div></div>
+    <div class="stat"><div class="v">Flat</div><div class="l">Renter incomes over the same period</div></div>
+    <div class="stat"><div class="v">Speculators</div><div class="l">Many buyers never reinvested; buildings slid into disrepair and foreclosure</div></div>
+  </div>
+  <p class="small">Source: Institute for Housing Studies, DePaul University.</p>
+  <p>CommonBlock's bet: if residents own part of the rise, they help drive it instead of resisting it. A safer, busier, more desirable neighborhood is good for everyone, including the investors.</p>
+</section>
+
+<section id="solution">
+  <h2>The solution, in three parts</h2>
+  <div class="grid3">
+    <div class="card">
+      <div class="eyebrow">The asset</div>
+      <h3>Appreciating real estate</h3>
+      <div class="big">$32M</div>
+      <div class="small">exit value on $20.7M of cost, base case</div>
+      <p>A $10M fund buys ~$16.7M of South Shore apartment and mixed-use buildings off a suppressed basis, puts ~$4M into renovation, and backs ~$13M more through advances to local owners. Held ten years with ordinary bank debt, it is worth about $32M at sale: ~$11.3M of appreciation above cost.</p>
+    </div>
+    <div class="card dark">
+      <div class="eyebrow">The token</div>
+      <h3>A share of that gain, on a blockchain</h3>
+      <div class="big gold">35%</div>
+      <div class="small muted">of appreciation, granted free to 5,385 households</div>
+      <p>The Community Trust holds 35% of the appreciation and issues it as Wealth tokens on Solana: one identical token per resident household, granted, not sold. Each token is a claim on real buildings, credited quarterly as they appreciate and never clawed back. The rules live in the token: who can hold it, how much can be drawn against it, and that any deal on these rails carries the residents' share.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">The rails</div>
+      <h3>One wallet, two balances</h3>
+      <div class="big">$922K</div>
+      <div class="small">spent at local merchants over the hold</div>
+      <p>Next to Wealth sits Spend, a dollar stablecoin that works like cash at participating local retailers. Harvest turns up to 60% of marked Wealth into Spend today, as an advance repaid only from the resident's own share at the sale. Merchants settle in seconds at 1.25% and can lend the money back through Harvest Notes.</p>
+    </div>
+  </div>
+  <div class="note">Why a blockchain and not a spreadsheet: the token has to grant thousands of identical stakes with no minimum and no lawyer, carry its own rules, sit on a ledger the neighborhood can audit, and settle at a corner store in seconds. The chain adds no value of its own. The buildings do.</div>
+</section>
+
+<section id="fund">
+  <h2>How the money moves</h2>
+  <p class="lede">Move the two assumptions that matter most and watch where the value lands. Everything below is an illustrative model calibrated to CommonBlock's full fund model at the base case.</p>
+  <div class="panel">
+    <div class="controls">
+      <div class="ctl"><label for="g">Rent growth per year <output id="gOut">3.0%</output></label><input type="range" id="g" min="1" max="5" step="0.25" value="3"><div class="hint">Base case 3%. Downside disclosure uses 2%.</div></div>
+      <div class="ctl"><label for="cap">Exit cap rate <output id="capOut">7.00%</output></label><input type="range" id="cap" min="6" max="8.5" step="0.25" value="7"><div class="hint">Going-in cap is 7.75%. Base case exits at 7.00%.</div></div>
+    </div>
+    <div class="results">
+      <div class="res"><div class="v" id="rExit">$32.0M</div><div class="l">portfolio value at sale, net of selling costs</div></div>
+      <div class="res"><div class="v" id="rAppr">$11.3M</div><div class="l">appreciation above $20.7M of cost</div></div>
+      <div class="res"><div class="v gold" id="rPool">$4.0M</div><div class="l">resident pool after Trust tax (35% + owner-advance share)</div></div>
+      <div class="res"><div class="v gold" id="rStake">$739</div><div class="l">per household, 5,385 granted stakes</div></div>
+      <div class="res"><div class="v" id="rEq">$17.7M</div><div class="l">net equity at sale after $14.3M of debt</div></div>
+    </div>
+    <div class="chart"><svg id="cFund" viewBox="0 0 900 230" role="img" aria-label="Where the sale proceeds go"></svg><div class="cap">Sale proceeds: debt repaid first, then the resident pool, then community investors and the PRI. Investors also receive rent and refinance proceeds during the hold, not shown here.</div></div>
+    <div class="note">Community investor return from the full model: <b>13.1%</b> a year at base (3.4x). <b>11.2%</b> at 2% rent growth, <b>12.05%</b> at a 7.75% exit cap, <b>9.8%</b> with both, <b>7.2%</b> after a 30% fall in exit value. The PRI earns a capped 2% in every case where it is repaid.</div>
+  </div>
+</section>
+
+<section id="stake">
+  <h2>A resident's stake, year by year</h2>
+  <p class="lede">One granted stake. It is marked conservatively every quarter (the appraisal less an 8% reserve, no credit for a lower exit cap until the sale), so what a resident sees during the hold is below what the stake pays at the end. Harvest lets them draw against it early.</p>
+  <div class="panel">
+    <div class="controls">
+      <div class="ctl"><label for="draw">How much of the Harvest limit this resident uses <output id="drawOut">100%</output></label><input type="range" id="draw" min="0" max="100" step="5" value="100"><div class="hint">0% is a saver who never draws. 100% draws the full 60% of marked value every year.</div></div>
+      <div class="ctl"><label for="loc">Share spent locally in Spend (vs. cashed out) <output id="locOut">75%</output></label><input type="range" id="loc" min="0" max="100" step="5" value="75"><div class="hint">Local draws accrue 4.5% a year, cash-outs 7%. Repaid only from this stake at the sale.</div></div>
+    </div>
+    <div class="results">
+      <div class="res"><div class="v gold" id="sDrawn">$199</div><div class="l">cash drawn early, years 3 to 9</div></div>
+      <div class="res"><div class="v" id="sInt">$44</div><div class="l">interest, the cost of spending sooner</div></div>
+      <div class="res"><div class="v" id="sSale">$495</div><div class="l">paid at the sale after repaying the advance</div></div>
+      <div class="res"><div class="v" id="sTotal">$694</div><div class="l">total received, against $739 for a saver</div></div>
+    </div>
+    <div class="chart"><svg id="cStake" viewBox="0 0 900 300" role="img" aria-label="Per-stake marked value and Harvest balance by year"></svg><div class="cap">Green: the stake's marked value (uses the rent-growth setting above). Gold: this resident's Harvest balance with interest. The dot at year 10 is the realized payout per stake at the exit cap chosen above.</div></div>
+    <div class="note">A sponsor-funded prize program ($60K a year) rewards holding: saving prizes are credited to Wealth, spending prizes are paid in Spend at local shops. Its assumed effect is 10 points less drawing. The model's lesson per stake: a saver gets $739; a maximum drawer gets $199 early and $495 later.</div>
+  </div>
+</section>
+
+<section id="loop">
+  <h2>A circular local economy</h2>
+  <p class="lede">Value earned on the block is spent on the block and lent back to the block. Each turn of the loop is a transaction that would otherwise have gone to a card network, a payday lender or a landlord outside the neighborhood.</p>
+  <div class="flow">
+    <div class="step"><span class="num">1</span><h3>Buildings appreciate</h3><p>35% of the gain is credited to residents as Wealth.</p></div>
+    <div class="step"><span class="num">2</span><h3>Residents Harvest into Spend</h3><p>Spending locally costs 4.5% against 7% to cash out, so the cheaper path keeps money in the neighborhood.</p></div>
+    <div class="step"><span class="num">3</span><h3>Merchants get paid</h3><p>Instant settlement at 1.25% instead of ~3% card fees, on one network across every CommonBlock neighborhood.</p></div>
+    <div class="step"><span class="num">4</span><h3>Merchants and savers lend it back</h3><p>Spend received, and resident savings, can buy Harvest Notes: a 5% senior claim that funds the next neighbor's advance.</p></div>
+    <div class="step"><span class="num">5</span><h3>The sale settles everything</h3><p>Advances and Notes are repaid from the resident pool; savers keep the rest.</p></div>
+  </div>
+  <div class="results">
+    <div class="res"><div class="v gold" id="lSpend">$922K</div><div class="l">spent at local merchants over the hold, at the settings above</div></div>
+    <div class="res"><div class="v" id="lNotes">$250K</div><div class="l">rolled back in through Harvest Notes by merchants and savers</div></div>
+    <div class="res"><div class="v" id="lFees">$12K</div><div class="l">merchant fees to CommonBlock, at 1.25%</div></div>
+  </div>
+</section>
+
+<section id="protection">
+  <h2>Who carries the downside</h2>
+  <p class="lede">The foundation's PRI takes the first loss. Community investors sit behind it. Residents put in nothing and can lose nothing. Drag the exit value to see who absorbs a fall.</p>
+  <div class="panel">
+    <div class="controls">
+      <div class="ctl"><label for="shock">Change in exit value versus the base case <output id="shockOut">0%</output></label><input type="range" id="shock" min="-50" max="15" step="5" value="0"><div class="hint">Debt of $14.3M is repaid first in every case.</div></div>
+    </div>
+    <div class="chart"><svg id="cProt" viewBox="0 0 900 260" role="img" aria-label="Sale proceeds by claimant under the chosen shock"></svg><div class="cap" id="protCap"></div></div>
+    <div class="note">Simplified waterfall for illustration: after debt, community investors' $5M capital is returned, then the PRI's $5M and its capped 2%, then the remaining appreciation splits 35% residents (floored at zero) and 65% investors. If a resident pool is too small to repay outstanding Harvest advances, the fund absorbs the shortfall; residents are never pursued. The full model reports about $633K unrepaid at a 30% fall, with investor return falling to 7.2% and the PRI untouched.</div>
+  </div>
+</section>
+
+<section id="who">
+  <h2>Who gets what</h2>
+  <div class="tbl"><table>
+    <thead><tr><th></th><th>Puts in</th><th>Receives</th><th>Puts at risk</th></tr></thead>
+    <tbody>
+    <tr><td>Residents (5,385 households)</td><td>Nothing. Residency is the qualification.</td><td>One identical Wealth token: 35% of appreciation above cost, credited quarterly, never clawed back. Harvest up to 60% early.</td><td>Nothing</td></tr>
+    <tr><td>Community investors (~1,465)</td><td>$5M, from $500 to $20,000 each</td><td>Rent, refinance proceeds and 65% of appreciation, net of fees: ~13.1% a year, 3.4x</td><td>Their capital, behind the PRI</td></tr>
+    <tr><td>Foundation PRI</td><td>$5M, first loss</td><td>Principal plus 2%, capped; no share of the resident pool; recycled into the next fund</td><td>First loss</td></tr>
+    <tr><td>Local merchants</td><td>Accept Spend</td><td>Instant settlement at 1.25% instead of ~3% card fees; Harvest Notes at 5%</td><td>Nothing</td></tr>
+    <tr><td>Building owners</td><td>A building and 20% of its future gain</td><td>Improvement capital of ~5% of value; keep title, cash flow and 80% of the upside</td><td>Nothing beyond the shared gain</td></tr>
+    <tr><td>CommonBlock</td><td>Sponsorship, the platform, a 1% GP commitment</td><td>Market fund fees, promote, merchant fee; nothing from the resident pool</td><td>GP commitment, startup capital</td></tr>
+    <tr><td>Accredited investors</td><td>Deal-by-deal capital, only with the 35% slice minted in</td><td>Deal tokens on normal terms: 20% promote over an 8% pref, ~11.4%</td><td>Their own capital</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="company">
+  <h2>CommonBlock, the company</h2>
+  <p class="lede">One company with two jobs: it sponsors and manages the funds, and it owns the platform (the wallet, the marks, Harvest, the merchant network). About 90% of funds are CommonBlock-sponsored; 10% are licensed to CDFIs, community development corporations, chambers of commerce and block clubs.</p>
+  <div class="stats">
+    <div class="stat"><div class="v">16 / 26</div><div class="l">neighborhoods / funds by year 10, on a conservative rollout: one a year for four years, then two</div></div>
+    <div class="stat"><div class="v">$650M</div><div class="l">of property on the platform by year 10</div></div>
+    <div class="stat"><div class="v">$12.7M</div><div class="l">fee revenue in year 10; ~$1.9M run-rate fee earnings</div></div>
+    <div class="stat"><div class="v">~$22.6M</div><div class="l">company value on real estate manager benchmarks, with a platform premium</div></div>
+  </div>
+  <p>It needs about <b>$1.5M</b> to reach self-sufficiency: a $1.0M foundation PRI at 2% and a $0.5M family-office note at 6% with a 5% warrant, plus $100K from the founder. Both are repaid from cash flow by year 10, and the foundation can roll its money into new funds' first-loss matches. Planned as a public benefit corporation, with a board of the founder as chair, a CEO, three independent directors and a foundation observer.</p>
+</section>
+
+<section id="ask">
+  <h2>What we're looking for</h2>
+  <div class="ask">
+    <div class="card"><h3>Funders</h3><p>A $5M first-loss PRI for the South Shore pilot fund, and $1.5M of company startup capital.</p></div>
+    <div class="card"><h3>Leaders</h3><p>A CEO to run the company and three independent directors: real estate and finance, legal and compliance, community. The founder stays as executive chair.</p></div>
+    <div class="card"><h3>Advisors and counsel</h3><p>Securities, PRI and private benefit, consumer lending, stablecoin payments, prize-linked savings, Opportunity Zones, the Trust's tax position.</p></div>
+  </div>
+</section>
+
+<section id="documents">
+  <h2>Documents</h2>
+  <p class="lede">The full materials behind this page. All are September 2026 working drafts.</p>
+  <div class="grid3">
+    <a class="card doc" href="docs/CommonBlock_Deck_Sept2026.pdf" target="_blank" rel="noopener"><div class="eyebrow">Deck · PDF · 24 slides</div><h3>CommonBlock overview deck</h3><p>The story in 16 slides plus an appendix: problem, solution, how a fund works, the rails, protection, the company and what we're looking for.</p></a>
+    <a class="card doc" href="docs/CommonBlock_White_Paper_Sept2026.pdf" target="_blank" rel="noopener"><div class="eyebrow">White paper · PDF · 19 pages</div><h3>CommonBlock white paper</h3><p>The full design with the reasoning behind it: the fund, the token, Harvest and Spend, the circular economy, fees, the company, governance and the questions for counsel.</p></a>
+    <a class="card doc" href="docs/CommonBlock_State_of_Play_Sept2026.pdf" target="_blank" rel="noopener"><div class="eyebrow">State of play · PDF · 6 pages</div><h3>What's decided and what's open</h3><p>For advisors and counsel: settled decisions and why, the disclosed downside, open questions, what needs real South Shore data, and next steps.</p></a>
+  </div>
+</section>
+
+<div class="contact">
+  <h2>Dollars and cents, hearts and minds.</h2>
+  <p>Michael Kelley, founder</p>
+  <div class="em">mjkelley00@gmail.com</div>
+</div>
+
+<footer>Working draft. Not an offer to sell or a solicitation to buy any security, and not legal, tax or investment advice. All figures are illustrative outputs of a planning model on stated assumptions (3% rent growth, 7.00% exit cap, Chicago market rents and costs) and have not been underwritten. The interactive panels use a simplified model calibrated to the full fund model at the base case; they are for understanding the mechanics, not for underwriting. Every legal, tax and securities treatment is open until counsel confirms it.</footer>
+</div>
+
+<script>
+(function(){
+  // ---- base-case anchors from the fund model ----
+  const NOI = [1291667,1581963,1684619,1774308,1863313,1896207,1984712,2073359,2106901,2196537,2286991]; // yrs 0..10, 3% rent growth
+  const BUYIN_MARK = [0,0,0,14168,94657,177560,262950,350902,441493,534801,630909]; // fund's 20% share of owner-advance gain at mark
+  const BASIS = 16666667, REHAB = 4004566, COST = BASIS + REHAB, DEBT_EXIT = 14271055;
+  const STAKES = 5385, SHARE = 0.35, RESERVE = 0.08, GOING_CAP = 0.0775, SELL = 0.02, UBTI = 0.21;
+  const BUYIN_REALIZED = 428582, PRI = 5000000, PRI_CAP = PRI*Math.pow(1.02,10), INV_CAP = 5000000;
+  const SPEND_PRIZES = 17850*10, NOTES_BASE = 249537, NOTE_SAVINGS = 25000*7, DRAW_LIMIT = 0.6;
+  const $ = id => document.getElementById(id);
+  const fm = (v,d=1) => { const a=Math.abs(v); if(a>=1e6) return (v<0?'-':'')+'$'+(a/1e6).toFixed(d)+'M'; if(a>=1e3) return (v<0?'-':'')+'$'+Math.round(a/1e3)+'K'; return (v<0?'-':'')+'$'+Math.round(a); };
+  const fd = v => '$'+Math.round(v).toLocaleString();
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+  function noiPath(g){ return NOI.map((n,t)=> n*Math.pow((1+g)/1.03, t)); }
+  function fund(g, cap, shock){
+    const noi = noiPath(g);
+    const exit = noi[10]/cap*(1-SELL)*(1+shock);
+    const appr = exit - COST;
+    const poolGross = SHARE*Math.max(0,appr) + BUYIN_REALIZED*Math.max(0,Math.min(1,(1+shock)));
+    const ubti = poolGross * UBTI * Math.min(1, DEBT_EXIT/Math.max(exit,1));
+    const pool = poolGross - ubti;
+    const netEq = exit - DEBT_EXIT;
+    // marks per stake, yrs 0..10
+    const marks = noi.map((n,t)=>{ const m = n/GOING_CAP*(1-RESERVE); return t===0?0:Math.max(0, SHARE*(Math.max(0,m-COST)+BUYIN_MARK[t]))/STAKES; });
+    return {exit, appr, pool, netEq, marks, perStake: pool/STAKES};
+  }
+  function harvest(marks, f, local, perStakeAtSale){
+    const r = local*0.045 + (1-local)*0.07;
+    let bal=0, drawn=0; const bals=[0];
+    for(let t=1;t<=10;t++){
+      bal = bal*(1+r);
+      if(t>=3 && t<=9){ const avail = Math.max(0, DRAW_LIMIT*marks[t] - bal); const d = f*avail; bal += d; drawn += d; }
+      bals.push(bal);
+    }
+    const owed = bal, interest = owed - drawn;
+    const atSale = Math.max(0, perStakeAtSale - owed);
+    const shortfall = Math.max(0, owed - perStakeAtSale);
+    return {drawn, interest, owed, atSale, total: drawn+atSale, bals, shortfall};
+  }
+  function waterfall(f){ // f = fund() at some shock
+    const rem = f.netEq - f.pool;              // after residents' claim
+    const inv1 = Math.max(0, Math.min(INV_CAP, rem));
+    const pri = Math.max(0, Math.min(PRI_CAP, rem - inv1));
+    const inv2 = Math.max(0, rem - inv1 - pri);
+    return {debt: DEBT_EXIT, residents: f.pool, investors: inv1+inv2, pri, priLoss: Math.max(0, PRI - pri), invLoss: Math.max(0, INV_CAP - inv1)};
+  }
+
+  // ---- drawing helpers ----
+  function stackBar(svgId, parts, total, caption){
+    const svg = $(svgId); const W=900, H=+svg.getAttribute('viewBox').split(' ')[3];
+    const x0=20, x1=880, y=70, h=56; let x=x0; let out='';
+    parts.forEach(p=>{ const w=(x1-x0)*Math.max(0,p.v)/total; if(w>0){ out+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${p.c}" rx="3"/>`; if(w>60) out+=`<text x="${x+w/2}" y="${y+h/2+5}" font-size="15" font-weight="700" text-anchor="middle" fill="${p.tc}" font-family="${css('--body')}">${fm(p.v)}</text>`; x+=w; } });
+    let lx=x0, ly=y+h+28; let leg='';
+    parts.forEach(p=>{ leg+=`<rect x="${lx}" y="${ly-11}" width="12" height="12" fill="${p.c}" rx="2"/><text x="${lx+18}" y="${ly}" font-size="14" fill="${css('--fg')}" font-family="${css('--body')}">${p.n}: ${fm(p.v)}</text>`; lx += 20 + 8*(p.n.length+fm(p.v).length) + 26; if(lx>720){lx=x0; ly+=24;} });
+    svg.innerHTML = `<text x="${x0}" y="40" font-size="16" font-weight="600" fill="${css('--green')}" font-family="${css('--display')}">${caption}</text>` + out + leg;
+  }
+  function lineChart(marks, bals, payout){
+    const svg=$('cStake'); const W=900,H=300, L=56,R=30,T=24,B=40;
+    const maxY = Math.max(payout, ...marks, ...bals)*1.1;
+    const xs = t=> L + (W-L-R)*t/10, ys = v=> H-B - (H-T-B)*v/maxY;
+    let o='';
+    // gridlines
+    for(let i=0;i<=4;i++){ const v=maxY*i/4, y=ys(v); o+=`<line x1="${L}" x2="${W-R}" y1="${y}" y2="${y}" stroke="${css('--line')}" stroke-width="1"/><text x="${L-8}" y="${y+4}" font-size="12" text-anchor="end" fill="${css('--muted')}" font-family="${css('--body')}">$${Math.round(v)}</text>`; }
+    for(let t=0;t<=10;t++) o+=`<text x="${xs(t)}" y="${H-B+18}" font-size="12" text-anchor="middle" fill="${css('--muted')}" font-family="${css('--body')}">Y${t}</text>`;
+    const path = arr => arr.map((v,t)=>`${t?'L':'M'}${xs(t)},${ys(v)}`).join(' ');
+    o+=`<path d="${path(marks)} L${xs(10)},${ys(0)} L${xs(0)},${ys(0)} Z" fill="${css('--green2')}" opacity="0.15"/>`;
+    o+=`<path d="${path(marks)}" fill="none" stroke="${css('--green2')}" stroke-width="3"/>`;
+    o+=`<path d="${path(bals)}" fill="none" stroke="${css('--gold')}" stroke-width="3" stroke-dasharray="6 4"/>`;
+    o+=`<line x1="${xs(10)}" x2="${xs(10)}" y1="${ys(marks[10])}" y2="${ys(payout)}" stroke="${css('--green')}" stroke-width="1.5" stroke-dasharray="3 3"/>`;
+    o+=`<circle cx="${xs(10)}" cy="${ys(payout)}" r="6" fill="${css('--green')}"/>`;
+    o+=`<text x="${xs(10)-10}" y="${ys(payout)-10}" font-size="13" font-weight="700" text-anchor="end" fill="${css('--green')}" font-family="${css('--body')}">paid at sale ${fd(payout)}</text>`;
+    o+=`<text x="${xs(6)}" y="${ys(marks[6])-10}" font-size="12.5" text-anchor="middle" fill="${css('--green2')}" font-family="${css('--body')}">marked value</text>`;
+    if(bals[10]>1) o+=`<text x="${xs(9)}" y="${ys(bals[9])+18}" font-size="12.5" text-anchor="middle" fill="${css('--gold')}" font-family="${css('--body')}">Harvest balance</text>`;
+    svg.innerHTML=o;
+  }
+
+  function render(){
+    const g = +$('g').value/100, cap=+$('cap').value/100, f=+$('draw').value/100, local=+$('loc').value/100, shock=+$('shock').value/100;
+    $('gOut').textContent=(g*100).toFixed(2).replace(/\.?0+$/,'')+'%'; $('capOut').textContent=(cap*100).toFixed(2)+'%';
+    $('drawOut').textContent=Math.round(f*100)+'%'; $('locOut').textContent=Math.round(local*100)+'%'; $('shockOut').textContent=(shock>0?'+':'')+Math.round(shock*100)+'%';
+    const base = fund(g,cap,0);
+    $('rExit').textContent=fm(base.exit); $('rAppr').textContent=fm(base.appr); $('rPool').textContent=fm(base.pool); $('rStake').textContent=fd(base.perStake); $('rEq').textContent=fm(base.netEq);
+    const wf0 = waterfall(base);
+    stackBar('cFund', [{n:'Debt repaid',v:wf0.debt,c:css('--surface2'),tc:css('--fg')},{n:'Residents',v:wf0.residents,c:css('--gold'),tc:'#1D2521'},{n:'Community investors',v:wf0.investors,c:css('--green2'),tc:'#FFFFFF'},{n:'PRI',v:wf0.pri,c:css('--green'),tc:'#FFFFFF'}], base.exit, 'Sale proceeds, '+fm(base.exit));
+    // stake
+    const h = harvest(base.marks, f, local, base.perStake);
+    $('sDrawn').textContent=fd(h.drawn); $('sInt').textContent=fd(h.interest); $('sSale').textContent=fd(h.atSale); $('sTotal').textContent=fd(h.total);
+    $('sTotal').nextElementSibling.textContent = 'total received, against '+fd(base.perStake)+' for a saver'+(h.shortfall>0?' (advance exceeds the stake by '+fd(h.shortfall)+'; the fund absorbs it)':'');
+    lineChart(base.marks, h.bals, base.perStake);
+    // loop: scale local spend by the whole neighborhood at this draw setting
+    const takeUp = 0.6; // model: 60% of available drawn each year (net of prizes)
+    const hTake = harvest(base.marks, takeUp*f, local, base.perStake);
+    const drawnAll = hTake.drawn*STAKES;
+    const spend = drawnAll*local + SPEND_PRIZES;
+    const notes = NOTE_SAVINGS + 0.10*drawnAll*local;
+    $('lSpend').textContent=fm(spend); $('lNotes').textContent=fm(notes); $('lFees').textContent=fm(spend*0.0125);
+    // protection
+    const s = fund(g,cap,shock); const wf = waterfall(s);
+    const hs = harvest(base.marks, takeUp, 0.75, s.perStake);
+    stackBar('cProt', [{n:'Debt repaid',v:wf.debt,c:css('--surface2'),tc:css('--fg')},{n:'Residents',v:wf.residents,c:css('--gold'),tc:'#1D2521'},{n:'Community investors',v:wf.investors,c:css('--green2'),tc:'#FFFFFF'},{n:'PRI',v:wf.pri,c:css('--green'),tc:'#FFFFFF'}], Math.max(s.exit, base.exit), 'Exit value '+fm(s.exit)+' ('+(shock>0?'+':'')+Math.round(shock*100)+'%)');
+    let cap2 = wf.priLoss>0 ? 'The PRI loses '+fm(wf.priLoss)+' of its $5M. ' : 'The PRI is repaid in full with its 2%. ';
+    cap2 += wf.invLoss>0 ? 'Community investors lose '+fm(wf.invLoss)+' of their $5M capital. ' : (wf.investors>INV_CAP ? 'Community investors get their capital back plus '+fm(wf.investors-INV_CAP)+' of appreciation at the sale. ' : 'Community investors get their capital back but no appreciation. ');
+    cap2 += s.pool>0 ? 'Residents receive '+fm(s.pool)+' ('+fd(s.perStake)+' per stake); ' : 'Residents receive nothing, and lose nothing; ';
+    cap2 += hs.shortfall>0 ? 'about '+fm(hs.shortfall*STAKES)+' of Harvest advances go unrepaid and the fund absorbs it.' : 'Harvest advances are repaid in full from the pool.';
+    $('protCap').textContent = cap2;
+  }
+  ['g','cap','draw','loc','shock'].forEach(id=>$(id).addEventListener('input',render));
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',render);
+  render();
+})();
+</script>
+
+</body>
+</html>

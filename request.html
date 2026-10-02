@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Request the full materials — CommonBlock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F4F3EE; --surface:#fff; --ink:#0E1A15; --muted:#4F574F; --rule:#DAD9D2; --green:#1F4A36; --lime:#D6F36B;
+    --display:'Bricolage Grotesque','Arial Narrow',Arial,sans-serif; --body:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;}
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--ink); font-family:var(--body); font-size:16px; line-height:1.55; min-height:100vh; display:flex; flex-direction:column;}
+  a{color:inherit;}
+  .topbar{display:flex; justify-content:space-between; align-items:center; gap:16px; padding:22px clamp(20px,5vw,56px); border-bottom:2px solid var(--rule);}
+  .brand{font-family:var(--display); font-weight:700; font-size:22px; letter-spacing:-.03em; text-decoration:none;}
+  .brand span{color:var(--green);}
+  .back{font-size:14px; font-weight:600; color:var(--green); text-decoration:none;}
+  .back:hover{text-decoration:underline;}
+  main{flex:1; width:100%; max-width:780px; margin:0 auto; padding:clamp(36px,7vh,80px) clamp(20px,5vw,56px) 64px;}
+  .eyebrow{font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--green); margin-bottom:14px;}
+  h1{font-family:var(--display); font-weight:700; letter-spacing:-.035em; font-size:clamp(38px,6.5vw,64px); line-height:1; margin-bottom:18px; text-wrap:balance;}
+  .lead{color:var(--muted); font-size:clamp(16px,2vw,18px); max-width:640px; margin-bottom:36px;}
+  form{display:grid; gap:20px; max-width:680px;}
+  .rowf{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  .field{display:flex; flex-direction:column; gap:7px; min-width:0;}
+  .field label{font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--green);}
+  .field .hint{font-size:13px; color:var(--muted);}
+  .field input,.field select,.field textarea{background:var(--surface); border:2px solid var(--rule); border-radius:12px; padding:12px 14px; color:var(--ink); font-family:var(--body); font-size:16px; width:100%;}
+  .field input::placeholder,.field textarea::placeholder{color:#8A908A;}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none; border-color:var(--green);}
+  .field select{appearance:none; -webkit-appearance:none; cursor:pointer; background-image:linear-gradient(45deg,transparent 50%,var(--green) 50%),linear-gradient(135deg,var(--green) 50%,transparent 50%); background-position:calc(100% - 20px) 55%,calc(100% - 14px) 55%; background-size:6px 6px; background-repeat:no-repeat; padding-right:38px;}
+  .field textarea{min-height:110px; resize:vertical;}
+  .ack{display:flex; gap:10px; align-items:flex-start; font-size:14px; color:var(--muted); line-height:1.5;}
+  .ack input{margin-top:4px; width:16px; height:16px; accent-color:var(--green); flex:none;}
+  .submit{justify-self:start; margin-top:4px; background:var(--ink); color:#fff; border:none; border-radius:999px; padding:16px 32px; font-family:var(--body); font-weight:700; font-size:16px; cursor:pointer;}
+  .submit:hover{background:var(--green);} .submit:disabled{opacity:.6; cursor:default;}
+  .submit:focus-visible,.back:focus-visible,.brand:focus-visible{outline:3px solid var(--green); outline-offset:3px;}
+  .fine{font-size:13px; color:var(--muted); line-height:1.55;}
+  .formstatus{margin-top:8px; padding:20px 22px; border-radius:18px; background:var(--lime); color:var(--ink); font-size:17px; line-height:1.5; max-width:680px;}
+  footer{border-top:2px solid var(--rule); padding:24px clamp(20px,5vw,56px); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:13px; color:var(--muted);}
+  footer a{color:var(--muted);}
+  @media (max-width:640px){ .rowf{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="brand" href="/">Common Block<span>.</span></a>
+    <a class="back" href="/">&larr; Back to site</a>
+  </div>
+  <main>
+    <div class="eyebrow">For funders, partners and advisors</div>
+    <h1>Request the full materials.</h1>
+    <p class="lead">The website carries the public editions. The full materials, including the working model behind every number, are shared by invitation. Tell us a little about yourself and we&rsquo;ll follow up by email.</p>
+    <form action="https://script.google.com/macros/s/AKfycbxGG2h3PiN3Sq3GlJN21-Y0EFlYVnHXszwqBRnk94FaaUQaAT3NtLSilgF_tsTm54Mr/exec" method="POST">
+      <input type="hidden" name="form_type" value="Materials request">
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
+      <div class="rowf">
+        <div class="field"><label for="rq-name">Full name</label><input id="rq-name" name="name" type="text" required maxlength="120" placeholder="Your name" autocomplete="name"></div>
+        <div class="field"><label for="rq-email">Email</label><input id="rq-email" name="email" type="email" required maxlength="160" placeholder="you@organization.org" autocomplete="email"></div>
+      </div>
+      <div class="rowf">
+        <div class="field"><label for="rq-org">Organization</label><input id="rq-org" name="organization" type="text" required maxlength="160" placeholder="Your organization" autocomplete="organization"></div>
+        <div class="field"><label for="rq-type">I&rsquo;m with a&hellip;</label>
+          <select id="rq-type" name="inquirer_type" required>
+            <option value="">Select&hellip;</option><option>Foundation or family office</option><option>Bank or payments company</option><option>Local business</option><option>Real estate, legal or finance firm</option><option>Community or civic organization</option><option>South Shore neighbor</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="rowf">
+        <div class="field"><label for="rq-int">I&rsquo;m interested in</label>
+          <select id="rq-int" name="interest" required><option value="">Select&hellip;</option><option>First-loss capital for the pilot fund</option><option>The card and the merchant network</option><option>Serving on the board or advising</option><option>Learning more about CommonBlock</option></select>
+        </div>
+        <div class="field"><label for="rq-gmail">Google account email <span style="font-weight:500;text-transform:none;letter-spacing:0">(optional)</span></label><input id="rq-gmail" name="google_email" type="email" maxlength="160" placeholder="If different from above"><span class="hint">Materials are shared through Google Drive.</span></div>
+      </div>
+      <div class="field"><label for="rq-msg">A few words on your interest</label><textarea id="rq-msg" name="message" required maxlength="2000" placeholder="What you&rsquo;re looking for, or how you heard about CommonBlock"></textarea></div>
+      <label class="ack"><input type="checkbox" name="confidentiality_ack" value="agreed" required> I understand that any materials CommonBlock shares are confidential, and I agree not to distribute or reproduce them.</label>
+      <button class="submit" type="submit">Send request</button>
+      <p class="fine">We&rsquo;ll review and follow up by email. Nothing on this site is an offer to sell, or a solicitation of an offer to buy, any security. Submitting creates no commitment and is not investment advice. Materials are shared at CommonBlock&rsquo;s discretion. By submitting, you consent to CommonBlock contacting you about your request.</p>
+    </form>
+  </main>
+  <footer>
+    <div>&copy; 2026 CommonBlock &middot; Working draft &mdash; not an offer or investment advice</div>
+    <div><a href="mailto:hello@commonblock.co">hello@commonblock.co</a> &nbsp;&middot;&nbsp; <a href="/">commonblock.co</a></div>
+  </footer>
+<script>
+  (function(){
+    var form = document.querySelector('form');
+    if(!form) return;
+    var status = document.createElement('p');
+    status.className='formstatus'; status.setAttribute('role','status'); status.setAttribute('aria-live','polite');
+    status.hidden = true;
+    form.parentNode.insertBefore(status, form.nextSibling);
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      var orig = btn.textContent;
+      btn.disabled = true; btn.textContent = 'Sending…';
+      // The Google Apps Script endpoint returns no CORS headers, so the response is opaque;
+      // a completed request is treated as received.
+      fetch(form.action, { method:'POST', body:new FormData(form), mode:'no-cors' })
+        .then(function(){
+          form.reset(); form.hidden = true;
+          status.textContent = 'Thank you. Your request has been received, and we’ll follow up by email.';
+          status.hidden = false;
+          status.scrollIntoView({behavior:'smooth', block:'center'});
+        })
+        .catch(function(){
+          status.textContent = 'Something went wrong. Please email hello@commonblock.co.';
+          status.hidden = false;
+          btn.disabled = false; btn.textContent = orig;
+        });
+    });
+  })();
+</script>
+</body>
+</html>
